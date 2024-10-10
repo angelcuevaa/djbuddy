@@ -6,4 +6,4 @@ class DataSerializer(serializers.ModelSerializer):
         fields=('name', 'description')
 
 class AudioSerializer(serializers.Serializer):
-    audio = serializers.FileField()
+    audio = serializers.FileField() 
