@@ -1,0 +1,3 @@
+How to start virtual environment (in vscode terminal)
+Set-ExecutionPolicy Unrestricted -Scope Process
+.\env\dj\Scripts\activate
