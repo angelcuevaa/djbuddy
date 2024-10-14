@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from .models import SpotifyToken
 import requests
+from django.conf import settings
+
+
 
 BASE_URL = 'https://api.spotify.com/v1'
 
@@ -19,8 +22,8 @@ def getCreds():
 def createToken():
     data = {
             "grant_type": "client_credentials",
-            "client_id": "5263c1f3c76245b69fc5f425050215ab",
-            "client_secret": "71b7dec16c784e7a9f2fcbdaaa60f627"
+            "client_id": settings.SPOTIFY_CLIENT,
+            "client_secret": settings.SPOTIFY_SECRET
             }
 
     response = requests.post("https://accounts.spotify.com/api/token",
@@ -30,7 +33,7 @@ def createToken():
     access_token = response.get('access_token')
     token_type = response.get('token_type')
     expires_in = response.get('expires_in')
-    print (response)
+    # print (response)
 
     updateOrCreateUserTokens(access_token, token_type, expires_in)
 
@@ -73,7 +76,6 @@ def updateOrCreateUserTokens(access_token, token_type, expires_in):
       expires_in = datetime.now(timezone.utc) + timedelta(seconds=expires_in)
       print(expires_in)
       if SpotifyToken.objects.exists():
-            print("in exists")
             tokens = SpotifyToken.objects.first()
             tokens.access_token = access_token
             tokens.expires_in = expires_in

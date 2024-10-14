@@ -1,3 +1,10 @@
 How to start virtual environment (in vscode terminal)
 Set-ExecutionPolicy Unrestricted -Scope Process
 .\env\dj\Scripts\activate
+
+How project was pushed to docker and eb: https://dev.to/ki3ani/deploying-your-first-dockerized-django-rest-api-on-aws-elastic-beanstalk-a-comprehensive-guide-2m77
+
+Used a docker compose to set env variables on docker based on .env file
+
+need to figure out how to push local changes to django to docker image
+    Right now, I can delete manually and push again with docker tag app-web angelcueva/music:latest ->  push angelcueva/music:latest  

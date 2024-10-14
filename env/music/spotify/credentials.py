@@ -1,5 +1,0 @@
-#change to env variables
-
-CLIENT_ID='5263c1f3c76245b69fc5f425050215ab'
-CLIENT_SECRET='71b7dec16c784e7a9f2fcbdaaa60f627'
-REDIRECT_URI=''

@@ -1,6 +1,5 @@
 import json
 from django.shortcuts import render
-from .credentials import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 from rest_framework.views import APIView
 import requests
 from .utils import updateOrCreateUserTokens
@@ -9,11 +8,11 @@ from rest_framework.decorators import api_view
 from .utils import getCreds, executeSpotifyRequest
 from .serizlizer import SpotifyTokenSerializer
 
-@api_view(['GET'])
-def getSpotify(request):
-    response = getCreds()
-    serializer = SpotifyTokenSerializer(response, many=False)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def getSpotify(request):
+#     response = getCreds()
+#     serializer = SpotifyTokenSerializer(response, many=False)
+#     return Response(serializer.data)
 
          
 @api_view(['POST'])
