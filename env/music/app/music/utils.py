@@ -15,12 +15,20 @@ import numpy as np
 
 
 
-async def shazam(file):
+
+async def shazam(file):  # out = await shazam.recognize_song('dora.ogg') # slow and deprecated, don't use this!
   shazam = Shazam()
-  # out = await shazam.recognize_song('dora.ogg') # slow and deprecated, don't use this!
   out = await shazam.recognize(file)
   # out = await shazam.recognize('C:\\Users\\angel\\OneDrive\Documents\\Playground\\Music App\\audio_files\\oddmob.mp3')  # rust version, use this!
   return out
+async def recommend(track_id):
+  try:
+    shazam = Shazam()
+    related = await shazam.related_tracks(track_id=track_id, limit=20, offset=2)
+    return related
+  except:
+    return {"error":"issue finding recommendations with shazamio", "tracks": []}
+
 
 
 #finding tempo

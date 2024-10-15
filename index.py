@@ -29,16 +29,25 @@ import numpy as np
 async def main():
   shazam = Shazam()
   track_id = 692700920
-  about_track = await shazam.track_about(track_id=track_id)
-  serialized = Serialize.track(data=about_track)
+  related = await shazam.related_tracks(track_id=track_id, limit=5, offset=2)
+  # ONLY №3, №4 SONG
+  print(related)
 
-  print(json.dumps(about_track))  # dict
-  print(serialized)  # serialized from dataclass factory
-file_path = open("audio_files\\x.wav", "r")
-print(type(file_path))
+# async def main():
+#   shazam = Shazam()
+#   track_id = 692700920
+#   about_track = await shazam.track_about(track_id=track_id)
+#   serialized = Serialize.track(data=about_track)
 
-# loop = asyncio.get_event_loop()
-# loop.run_until_complete(main())
+#   print(json.dumps(about_track))  # dict
+#   print(serialized)  # serialized from dataclass factory
+
+
+# file_path = open("audio_files\\x.wav", "r")
+# print(type(file_path))
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 
 #finding tempo
 # y, sr = librosa.load("audio_files\\audio.mp3")

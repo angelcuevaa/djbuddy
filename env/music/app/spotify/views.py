@@ -44,34 +44,37 @@ def getTrackDetails(request):
          return Response({"error": "track_id is a required parameter"}, status=400)
     track_id = request.GET["track_id"]
     track_details = executeSpotifyRequest(f'/audio-features/{track_id}')
+    if track_details.get("error"):
+         return Response({"error": "invalid track_id"}, status=404) 
+    #return Response(track_details)
     camelot_dict = {
         (0,1):'8B',
-		(1,1):'3B',
-		(2,1):'10B',
-		(3,1):'5B',
-		(4,1):'12B',
-		(5,1):'7B',
-		(6,1):'2B',
-		(7,1):'9B',
-		(8,1):'4B',
-		(9,1):'11B',
-		(10,1):'6B',
-		(11,1):'1B',
-		(0,0):'5A',
-		(1,0):'12A',
-		(2,0):'7A',
-		(3,0):'2A',
-		(4,0):'9A',
-		(5,0):'4A',
-		(6,0):'11A',
-		(7,0):'6A',
-		(8,0):'1A',
-		(9,0):'8A',
-		(10,0):'3A',
-		(11,0):'10A'
+        (1,1):'3B',
+        (2,1):'10B',
+        (3,1):'5B',
+        (4,1):'12B',
+        (5,1):'7B',
+        (6,1):'2B',
+        (7,1):'9B',
+        (8,1):'4B',
+        (9,1):'11B',
+        (10,1):'6B',
+        (11,1):'1B',
+        (0,0):'5A',
+        (1,0):'12A',
+        (2,0):'7A',
+        (3,0):'2A',
+        (4,0):'9A',
+        (5,0):'4A',
+        (6,0):'11A',
+        (7,0):'6A',
+        (8,0):'1A',
+        (9,0):'8A',
+        (10,0):'3A',
+        (11,0):'10A'
     }
     track_details["camelot"] = camelot_dict[(track_details.get("key"), track_details.get("mode"))]
-    return Response(track_details) 
+    return Response(track_details)
 
 @api_view(['GET'])
 def getRecommendations(request):
@@ -86,7 +89,7 @@ def getRecommendations(request):
         "min_tempo": tempo - 5,
         "max_tempo": tempo + 5,
         "target_key": key,
-        "limit": 10
+        "limit": 20
     }
     recommendations_response = executeSpotifyRequest(f'/recommendations',params)
     return Response(recommendations_response)
