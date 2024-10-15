@@ -3,6 +3,8 @@ from adrf.decorators import api_view
 from .utils import shazam, recommend
 from adrf.views import APIView
 from .serializer import AudioSerializer
+from rest_framework_api_key.permissions import HasAPIKey
+
 
 
 

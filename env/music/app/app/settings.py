@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'oauth2_provider',
     'spotify',
-    'adrf'
+    'adrf',
+    'rest_framework_api_key'
 ]
 
 MIDDLEWARE = [
@@ -141,4 +142,9 @@ OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 3600,  # Access token lifetime (1 hour)
     'REFRESH_TOKEN_EXPIRE_SECONDS': 2592000,  # Refresh token lifetime (30 days)
     # ... other settings
+}
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ]
 }
